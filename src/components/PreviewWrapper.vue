@@ -1,7 +1,8 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, defineEmits } from 'vue'
 import { genFileId } from 'element-plus'
 
+const emits = defineEmits(['file-change'])
 const upload = ref()
 
 const handleExceed = (files) => {
@@ -13,8 +14,10 @@ const handleExceed = (files) => {
 
 function httpRequest(file) {
   const fileReader = new FileReader()
-  const text = fileReader.readAsText(file)
-  console.log('ddd', text)
+  fileReader.readAsText(file.file)
+  fileReader.onload = (e) => {
+    emits('file-change', e.target.result)
+  }
 }
 </script>
 
@@ -29,9 +32,6 @@ function httpRequest(file) {
     >
       <template #trigger>
         <el-button type="primary">select file</el-button>
-      </template>
-      <template #tip>
-        <div class="el-upload__tip text-red">limit 1 file, new file will cover the old file</div>
       </template>
     </el-upload>
     <slot name="default"></slot>

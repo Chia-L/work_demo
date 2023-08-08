@@ -10,20 +10,23 @@ const preview = ref(null)
 const scrollOut = ref()
 
 onMounted(async () => {
-  nextTick(() => {
-    loadFile()
-  })
+  loadFile()
   sHeight.value = window.screen.height - 320 + 'px'
 })
+
+function fileChange(v) {
+  message.value = v
+  loadFile()
+}
 
 // 加载文档
 const loadFile = async () => {
   // 从接口获取文档内容，这部分省略了霍~
-  message.value = ''
+  // message.value = ''
 
   // 建目录
   await nextTick()
-  const anchors = preview.value.querySelectorAll('h1,h2,h3,h4,h5,h6')
+  const anchors = preview.value.$el.querySelectorAll('h1,h2,h3,h4,h5,h6')
 
   const titles = Array.from(anchors).filter((title) => !!title.innerText.trim())
 
@@ -45,7 +48,7 @@ const loadFile = async () => {
 const scrollTop = (anchor) => {
   const { lineIndex } = anchor
 
-  const heading = preview.value?.querySelector(`[data-v-md-line="${lineIndex}"]`)
+  const heading = preview.value.$el.querySelector(`[data-v-md-line="${lineIndex}"]`)
 
   if (heading) {
     console.log(preview.value)
@@ -59,7 +62,7 @@ const scrollTop = (anchor) => {
 </script>
 
 <template>
-  <preview-wrapper>
+  <preview-wrapper @file-change="fileChange">
     <template #default>
       <div class="markInner">
         <el-row :gutter="10">
