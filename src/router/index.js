@@ -9,7 +9,8 @@ const preview = [
   { path: '/md', component: () => import('@/components/MdDemo.vue') },
   { path: '/docx', component: () => import('@/components/DocxDemo.vue') },
   { path: '/excel', component: () => import('@/components/ExcelDemo.vue') },
-  { path: '/pdf', component: () => import('@/components/PdfDemo.vue') }
+  { path: '/pdf', component: () => import('@/components/PdfDemo.vue') },
+  { path: '/img', component: () => import('@/components/ImgDemo.vue') }
 ]
 
 const routes = [
