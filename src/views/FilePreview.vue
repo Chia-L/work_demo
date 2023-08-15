@@ -35,6 +35,7 @@ function go(key) {
       <el-menu-item index="docx"> docx文件预览 </el-menu-item>
       <el-menu-item index="excel"> excel文件预览 </el-menu-item>
       <el-menu-item index="pdf"> pdf文件预览 </el-menu-item>
+      <el-menu-item index="img"> img文件预览 </el-menu-item>
     </el-menu>
     <router-view />
   </div>
